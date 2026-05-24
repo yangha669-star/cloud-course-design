@@ -1,0 +1,27 @@
+﻿# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+.env
+venv/
+.venv/
+
+# VS Code
+.vscode/
+
+# Docker
+*.log
+
+# System
+.DS_Store
+Thumbs.db
+
+# Kubernetes secrets
+*-secret.yaml
+secret.yaml
+
+# Reports
+*.docx
+*.pdf

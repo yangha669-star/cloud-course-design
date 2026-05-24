@@ -1,0 +1,95 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>云计算课程设计</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, 'Microsoft YaHei', sans-serif;
+      background: linear-gradient(135deg, #eef4ff, #ffffff);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card {
+      width: 560px;
+      background: #ffffff;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+      text-align: center;
+    }
+
+    h1 {
+      color: #1677ff;
+      margin-bottom: 10px;
+    }
+
+    .info {
+      margin: 20px 0;
+      padding: 15px;
+      background: #f5f7fa;
+      border-radius: 12px;
+      line-height: 1.8;
+    }
+
+    button {
+      padding: 12px 26px;
+      border: none;
+      border-radius: 10px;
+      background: #1677ff;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #0958d9;
+    }
+
+    pre {
+      text-align: left;
+      margin-top: 24px;
+      background: #1f2937;
+      color: #d1fae5;
+      padding: 18px;
+      border-radius: 12px;
+      min-height: 100px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>云计算课程设计</h1>
+    <p>Flask + Redis + Nginx + Docker Compose</p>
+
+    <div class="info">
+      <div>姓名：赵璟心</div> 
+      <div>学号：2023112556</div> 
+    </div>
+
+    <button onclick="pingBackend()">测试后端 API</button>
+
+    <pre id="result">点击按钮后，请求 /api/ping 接口。</pre>
+  </div>
+
+  <script>
+    async function pingBackend() {
+      const resultBox = document.getElementById("result");
+      resultBox.innerText = "请求中...";
+
+      try {
+        const response = await fetch("/api/ping");
+        const data = await response.json();
+        resultBox.innerText = JSON.stringify(data, null, 2);
+      } catch (error) {
+        resultBox.innerText = "请求失败：" + error;
+      }
+    }
+  </script>
+</body>
+</html>
