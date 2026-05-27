@@ -210,3 +210,152 @@
 # 六、第二部分实验总结
 
 本实验基于 Spark Operator 在华为云 CCE 集群中提交 PySpark 作业，对豆瓣电影数据集进行了读取、字段解析、缺失值统计、数据清洗和多维度统计分析。实验结果表明，Spark 能够较好地处理结构化 CSV 数据，并支持通过 Spark SQL、DataFrame API 和窗口函数完成电影评分、类型、国家地区、年份趋势等统计分析任务。同时，通过 Pandas 与 PySpark 性能对比和 Amdahl 定律分析，说明分布式计算在实际运行中会受到任务调度、通信和序列化开销的影响。
+
+
+---
+
+# 七、附录 B-1 WordCount 示例作业
+
+## 图 Spark-00-1 WordCount 示例作业完成
+
+**截图文件：**
+
+`Spark-00-wordcount示例作业完成.png`
+
+**截图说明：**
+
+该截图展示 `wordcount-example` SparkApplication 作业状态为 COMPLETED，Driver Pod 状态为 Completed，说明根据附录 B-1 模板提交的 WordCount 示例作业已成功运行完成。
+
+**报告图下注释：**
+
+如图 Spark-00-1 所示，WordCount 示例作业 `wordcount-example` 已成功提交到 CCE 集群并运行完成，Driver Pod 状态为 Completed，说明 Spark Operator 能够正常管理 PySpark 作业。
+
+---
+
+## 图 Spark-00-2 WordCount 日志结果
+
+**截图文件：**
+
+`Spark-00-wordcount日志结果.png`
+
+**截图说明：**
+
+该截图展示 WordCount 示例作业输出的 Top 10 words 统计结果，其中 `spark` 出现次数最多，说明 WordCount 程序成功读取文本并完成词频统计。
+
+**报告图下注释：**
+
+如图 Spark-00-2 所示，WordCount 示例作业成功输出 Top 10 words 词频统计结果，说明 PySpark 程序能够在 Spark on Kubernetes 环境中正常执行。
+
+---
+
+# 八、executorInstances=1 与 executorInstances=2 性能对比
+
+## 图 Spark-12 executor=1 作业运行完成
+
+**截图文件：**
+
+`Spark-12-executor1运行完成.png`
+
+**截图说明：**
+
+该截图展示将 SparkApplication 中 `executor.instances` 设置为 1 后，豆瓣电影分析作业成功运行完成，状态为 COMPLETED。
+
+**报告图下注释：**
+
+如图 Spark-12 所示，当 `executor.instances=1` 时，豆瓣电影分析 SparkApplication 能够成功运行完成，说明单 Executor 配置下作业执行正常。
+
+---
+
+## 图 Spark-13-1 executor=1 PySpark 查询耗时
+
+**截图文件：**
+
+`Spark-13-executor1-PySpark查询耗时.png`
+
+**截图说明：**
+
+该截图展示 `executor.instances=1` 时 PySpark 执行“按电影类型统计数量 Top10”查询的耗时，结果约为 0.649 秒。
+
+**报告图下注释：**
+
+如图 Spark-13-1 所示，当 `executor.instances=1` 时，PySpark 类型统计查询耗时约为 0.649 秒。
+
+---
+
+## 图 Spark-13-2 executor=1 Spark 总耗时
+
+**截图文件：**
+
+`Spark-13-executor1-Spark总耗时.png`
+
+**截图说明：**
+
+该截图展示 `executor.instances=1` 时 Spark 作业整体运行耗时，结果约为 31.860 秒。
+
+**报告图下注释：**
+
+如图 Spark-13-2 所示，当 `executor.instances=1` 时，Spark 作业整体运行耗时约为 31.860 秒。
+
+---
+
+## 图 Spark-14 executor=2 作业运行完成
+
+**截图文件：**
+
+`Spark-14-executor2运行完成.png`
+
+**截图说明：**
+
+该截图展示将 SparkApplication 中 `executor.instances` 设置为 2 后，豆瓣电影分析作业成功运行完成，状态为 COMPLETED。
+
+**报告图下注释：**
+
+如图 Spark-14 所示，当 `executor.instances=2` 时，豆瓣电影分析 SparkApplication 同样能够成功运行完成，说明双 Executor 配置下作业执行正常。
+
+---
+
+## 图 Spark-15-1 executor=2 PySpark 查询耗时
+
+**截图文件：**
+
+`Spark-15-executor2-PySpark查询耗时.png`
+
+**截图说明：**
+
+该截图展示 `executor.instances=2` 时 PySpark 执行“按电影类型统计数量 Top10”查询的耗时，结果约为 0.873 秒。
+
+**报告图下注释：**
+
+如图 Spark-15-1 所示，当 `executor.instances=2` 时，PySpark 类型统计查询耗时约为 0.873 秒。
+
+---
+
+## 图 Spark-15-2 executor=2 Spark 总耗时
+
+**截图文件：**
+
+`Spark-15-executor2-Spark总耗时.png`
+
+**截图说明：**
+
+该截图展示 `executor.instances=2` 时 Spark 作业整体运行耗时，结果约为 35.850 秒。
+
+**报告图下注释：**
+
+如图 Spark-15-2 所示，当 `executor.instances=2` 时，Spark 作业整体运行耗时约为 35.850 秒。
+
+---
+
+## 图 Spark-16 性能对比图
+
+**截图文件：**
+
+`Spark-16-性能对比图.png`
+
+**截图说明：**
+
+该截图以柱状图形式对比 Pandas、PySpark 单 Executor 和 PySpark 双 Executor 的查询耗时。结果显示 Pandas 查询耗时约为 0.580 秒，PySpark 单 Executor 查询耗时约为 0.649 秒，PySpark 双 Executor 查询耗时约为 0.873 秒。
+
+**报告图下注释：**
+
+如图 Spark-16 所示，在本实验数据规模下，Pandas 单机执行时间约为 0.580 秒，PySpark 单 Executor 执行时间约为 0.649 秒，PySpark 双 Executor 执行时间约为 0.873 秒。由于数据规模相对有限，Spark 的任务调度、Executor 启动、网络通信和序列化等开销较明显，因此增加 Executor 数量并未带来线性加速。
