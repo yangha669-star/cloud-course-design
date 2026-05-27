@@ -38,3 +38,7 @@ offline-resources/*
 *.7z
 *.img
 *.iso
+
+# Windows system files
+desktop.ini
+Thumbs.db
