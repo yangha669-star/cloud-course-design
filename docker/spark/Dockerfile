@@ -3,10 +3,12 @@
 WORKDIR /opt/spark/work-dir
 
 COPY spark-jobs/douban_spark_analysis.py /opt/spark/work-dir/douban_spark_analysis.py
+COPY spark-jobs/douban_spark_analysis_v2.py /opt/spark/work-dir/douban_spark_analysis_v2.py
 COPY datasets/raw/douban_movies.csv /opt/spark/work-dir/data/douban_movies.csv
 
 USER root
 RUN chmod 644 /opt/spark/work-dir/douban_spark_analysis.py && \
+    chmod 644 /opt/spark/work-dir/douban_spark_analysis_v2.py && \
     chmod 644 /opt/spark/work-dir/data/douban_movies.csv
 
 USER 185
