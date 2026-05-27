@@ -25,3 +25,16 @@ secret.yaml
 # Reports
 *.docx
 *.pdf
+
+# large offline resource package
+offline-resources/*
+!offline-resources/README.md
+
+# avoid uploading large archives or images
+*.tar
+*.tar.gz
+*.zip
+*.rar
+*.7z
+*.img
+*.iso
